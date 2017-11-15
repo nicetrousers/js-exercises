@@ -40,7 +40,7 @@ const x = [1,2,3];
 function arrayToList(anArray) {
 	let list = {};
 	for (var i = anArray.length; i > 0 ; i--) {
-		list = {value: i, rest: list}
+		list = {value: anArray[i - 1], rest: list}
 	};
 	return list;
 }
@@ -64,3 +64,13 @@ function prepend(newItem, list) {
 
 const a = prepend(y, 0);
 
+function nth(list, n) {
+	const i = listToArray(list);
+	if (n > i.length) {
+		return("undefined");
+	} else {
+		return i[n - 1];
+	};
+};
+
+nth(y,2);
