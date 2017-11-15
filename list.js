@@ -36,10 +36,24 @@ is no such element.
 
 If you haven’t already, also write a recursive version of nth. */
 
-var list = [1,2,3];
+const x = [1,2,3];
 
 function arrayToList(anArray) {
-
+	let list = {};
+	for (var i = anArray.length; i > 0 ; i--) {
+		list = {value: i, rest: list}
+	};
+	return list;
 }
 
-arrayToList(list);
+arrayToList(x);
+
+function listToArray(aList) {
+	z = [];
+	for (var node = aList; node; node = node.rest) {
+		z.push(node.value);
+	}
+	return z;
+};
+
+listToArray(y);
