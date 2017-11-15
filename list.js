@@ -27,10 +27,9 @@ list.
 
 Write a function arrayToList that builds up a data structure like 
 the previous one when given [1, 2, 3] as an argument, and write a 
-listToArray function that produces an array from a list. Also write 
-the helper functions prepend, which takes an element and a list and 
-creates a new list that adds the element to the front of the input 
-list, and nth, which takes a list and a number and returns the 
+listToArray function that produces an array from a list. 
+
+Also write the helper functions prepend, which takes an element and a list and creates a new list that adds the element to the front of the input list, and nth, which takes a list and a number and returns the 
 element at the given position in the list, or undefined when there 
 is no such element.
 
@@ -46,14 +45,22 @@ function arrayToList(anArray) {
 	return list;
 }
 
-arrayToList(x);
+const y = arrayToList(x);
 
-function listToArray(aList) {
-	z = [];
-	for (var node = aList; node; node = node.rest) {
-		z.push(node.value);
+function listToArray(list) {
+	newArray = [];
+	for (var node = list; node; node = node.rest) {
+		newArray.push(node.value);
 	}
-	return z;
+	return newArray;
 };
 
-listToArray(y);
+const z = listToArray(y);
+
+function prepend(newItem, list) {
+	list = {value: newItem, rest: list};
+	return list;
+};
+
+const a = prepend(y, 0);
+
