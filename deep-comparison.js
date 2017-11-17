@@ -16,9 +16,9 @@ account: by a historical accident, typeof null also produces "object".
 var x = 1;
 var y = 2;
 var z = 1;
-var a = { value: 1, };
-var b = { value: 2, };
-var c = { value: 2, };
+var a = { value: 1, name: Keith, drink: Coke, };
+var b = { value: 2, name: Kim, drink: Sprite, };
+var c = { value: 2, name: Kim, drink: Sprite, };
 var n = null;
 var nn = null;
 
@@ -27,16 +27,23 @@ function deepEqual(value1,value2) {
 		if (value1 == null || value2 == null) {
 			return ((value1 === value2) ? true : false);
 		} else {
-			console.log("objection");
+			if (Object.keys(value1).length == Object.keys(value2).length) {
+				console.log("same length");
+				for (var property in value1) {
+					if (value1.hasOwnProperty(property)) {
+						console.log(property);
+					}
+				}
+			} else {
+				return false
+			}
 		}
 	} else {
 		return ((value1 === value2) ? true : false);
 	}
 }
 
-deepEqual(x,y);
-
-
+deepEqual(a,b);
 
 
 function listToArray(list) {
