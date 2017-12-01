@@ -1,4 +1,6 @@
-/*  The == operator compares objects by identity. But sometimes, you
+/* Eloquent JavaScript ch04: Deep Comparison
+
+The == operator compares objects by identity. But sometimes, you
 would prefer to compare the values of their actual properties.
 
 Write a function, deepEqual, that takes two values and returns true
