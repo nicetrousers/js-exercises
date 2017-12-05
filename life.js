@@ -29,4 +29,61 @@ function cAverage(century) {
 
 cAverage(19);
 
+// update to automatically average all present centuries
+// not just the century passed to function
 
+function average(array) {
+  function plus(a, b) { return a + b; }
+  return array.reduce(plus) / array.length;
+}
+
+var centuries = new Object();
+
+ancestry.forEach(function(person) { 
+	var c = Math.ceil(person.died / 100);
+	if (centuries[c] === undefined) centuries[c] = [];
+	centuries[c].push(person);
+});
+
+console.log(centuries);
+
+	var ages = [];
+	var century = century;
+	ancestry.forEach(function(person) {
+		var c = Math.ceil(person.died / 100);
+		if (c === century) {
+			var age = person.died - person.born
+			ages.push(age);
+		}
+	});
+	console.log( average(ages) ); 
+};
+
+cAverage(19);
+
+
+
+/* For bonus points, write a function groupBy that abstracts the grouping
+operation. It should accept as arguments an array and a function that
+computes the group for an element in the array and returns an object
+that maps group names to arrays of group numbers. */
+
+function average(array) {
+  function plus(a, b) { return a + b; }
+  return array.reduce(plus) / array.length;
+}
+
+function cAverage(century) {
+	var ages = [];
+	var century = century;
+	ancestry.forEach(function(person) {
+		var c = Math.ceil(person.died / 100);
+		if (c === century) {
+			var age = person.died - person.born
+			ages.push(age);
+		}
+	});
+	console.log( average(ages) ); 
+};
+
+cAverage(19);
