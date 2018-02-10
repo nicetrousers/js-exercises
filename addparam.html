@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AddParameter tool</title>
+  <script src="addparam.js" type="text/javascript"></script>
+	<link rel="stylesheet" type="text/css" href="addparam.css" />
+</head>
+<body>
+	<h1>Add parameters</h1>
+
+  <form id="add_param_form" name="add_param_form" action="" method="">
+
+  	<div class="code params">
+	  	<label for="params">Enter parameters:</label>
+	  	<input type="text" name="params" id="params" />
+	  </div>
+
+  	<div class="code ">
+	  	<label for="params">Enter code:</label>
+	  	<input type="text" name="code-input" id="code-input" class="code"/>
+		</div>
+
+  	<div class="code ">
+	  	<label for="params">Output code:</label>
+	  	<input type="text" name="code-output" id="code-output" class="code" />
+	  </div>
+
+    <button type="submit" id="submit" name="submit" value="Submit" class="btn" onclick="return addParams();">SUBMIT</button>
+
+	</form>
+</body>
+</html>

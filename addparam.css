@@ -1,0 +1,31 @@
+body * {
+	box-sizing: border-box;
+}
+.code {
+	width: 45%;
+	padding: 20px;
+}
+.code input {
+	padding: 10px;
+	height: 500px;
+	vertical-align: top;
+}
+
+input[type="text"] {
+	width: 100%;
+}
+
+.code.params {
+	display: block;
+}
+.code {
+	display: inline-block;
+}
+
+.code.params input {
+	height: 30px;
+
+}
+label {
+	display: block;
+}
