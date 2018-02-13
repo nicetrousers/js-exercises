@@ -2,31 +2,34 @@
 <html>
 <head>
 	<title>AddParameter tool</title>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"  type="text/javascript"></script>
   <script src="addparam.js" type="text/javascript"></script>
 	<link rel="stylesheet" type="text/css" href="addparam.css" />
 </head>
 <body>
 	<h1>Add parameters</h1>
 
-  <form id="add_param_form" name="add_param_form" action="" method="">
-
   	<div class="code params">
-	  	<label for="params">Enter parameters:</label>
-	  	<input type="text" name="params" id="params" />
+	  	<label for="parameters">Enter parameters:</label>
+	  	<textarea name="parameters" id="parameters" cols="125" rows="1" > </textarea>
 	  </div>
 
   	<div class="code ">
-	  	<label for="params">Enter code:</label>
-	  	<input type="text" name="code-input" id="code-input" class="code"/>
+	  	<label for="codeInput">Enter code:</label>
+	  	<textarea name="codeInput" id="codeInput" cols="125" rows="25" > </textarea>
 		</div>
 
+    <button id="submit" name="submit" value="Submit" class="btn" onclick="return addParams();">SUBMIT</button>
+
   	<div class="code ">
-	  	<label for="params">Output code:</label>
-	  	<input type="text" name="code-output" id="code-output" class="code" />
+	  	<label for="codeOutput">Output code:</label>
+	  	<textarea name="codeOutput" id="codeOutput" cols="125" rows="25"  disabled > </textarea>
 	  </div>
 
-    <button type="submit" id="submit" name="submit" value="Submit" class="btn" onclick="return addParams();">SUBMIT</button>
-
 	</form>
+
+	<div id="framewrap">
+		<iframe id="codeFrame" style="display: none;"></iframe>
+	</div>
 </body>
 </html>
