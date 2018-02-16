@@ -1,21 +1,30 @@
 body * {
 	box-sizing: border-box;
 }
-.code {
+h1, h3 {
+	font-family: sans-serif;
+}
+.codebox {
 	width: 100%;
 	display: block;
 	margin-bottom: 20px;
 }
-.code textarea {
+.codebox textarea {
 	padding: 10px;
 	vertical-align: top;
+}
+.codebox p {
+	font-family: monospace;
+}
+#notOutputLinks p {
+	color: red;
 }
 
 input[type="text"] {
 	width: 100%;
 }
 
-.code.params input {
+.codebox.params input {
 	height: 30px;
 
 }

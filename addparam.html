@@ -9,19 +9,28 @@
 <body>
 	<h1>Add parameters</h1>
 
-  	<div class="code params">
+  	<div class="codebox params">
 	  	<label for="parameters">Enter parameters:</label>
 	  	<textarea name="parameters" id="parameters" cols="125" rows="1" > </textarea>
 	  </div>
 
-  	<div class="code ">
+  	<div class="codebox">
 	  	<label for="codeInput">Enter code:</label>
 	  	<textarea name="codeInput" id="codeInput" cols="125" rows="25" > </textarea>
 		</div>
 
     <button id="submit" name="submit" value="Submit" class="btn" onclick="return addParams();">SUBMIT</button>
 
-  	<div class="code ">
+  	<div class="codebox">
+  		<div id="outputParams">
+  			<h3>Parameter used:</h3>
+	  	</div>
+	  	<div id="outputLinks">
+	  		<h3>Links updated:</h3>
+	  	</div>
+	  	<div id="notOutputLinks">
+	  		<h3>Links NOT changed:</h3>
+	  	</div>
 	  	<label for="codeOutput">Output code:</label>
 	  	<textarea name="codeOutput" id="codeOutput" cols="125" rows="25"  disabled > </textarea>
 	  </div>
