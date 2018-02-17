@@ -1,4 +1,5 @@
 function addParams() {
+	$('.code').remove();
 	var parameters = document.getElementById('parameters').value.trim(); 
 	var codeInput = document.getElementById('codeInput').value;
 
@@ -29,17 +30,12 @@ function changeLinks(frame,params) {
 	var anchorList = frame.contentDocument.getElementsByTagName('a');
 	for (i = 0; i < anchorList.length; i++) {
 		var anchor = anchorList[i].getAttribute('href');
-
 		if (anchor.indexOf('%%') == -1) {
 			if (anchor.indexOf('?') != -1) anchor = (anchor + "&" + params);
 			else anchor = (anchor + "?" + params);
-	 
-		  console.log(anchor); // remove when done
 		  printOutput(anchor, 'outputLinks');
-
 		  anchorList[i].setAttribute('href', anchor);
 		} else {
-			// anchor = anchorList[i].href.value;
 			printOutput(anchor, 'notOutputLinks');
 		}
 	};
