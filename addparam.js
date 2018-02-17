@@ -30,7 +30,8 @@ function changeLinks(frame,params) {
 	var anchorList = frame.contentDocument.getElementsByTagName('a');
 	for (i = 0; i < anchorList.length; i++) {
 		var anchor = anchorList[i].getAttribute('href');
-		if (anchor.indexOf('%%') == -1) {
+		var check = checkAnchor(anchor);
+		if (check) {
 			if (anchor.indexOf('?') != -1) anchor = (anchor + "&" + params);
 			else anchor = (anchor + "?" + params);
 		  printOutput(anchor, 'outputLinks');
@@ -61,4 +62,15 @@ function printOutput(text,target) {
 	var outputTarget = document.getElementById(target);
 	var outputText = "<p class='code'>"+text+"</p>";
 	outputTarget.innerHTML += outputText;
+}
+
+function checkAnchor(link) {
+	if (
+		(link.indexOf('%%') == -1) &&
+		(link.indexOf('mailto') == -1) &&
+		(link.indexOf('{\\link') == -1)) {
+		return true;
+	} else {
+		return false;
+	}
 }
