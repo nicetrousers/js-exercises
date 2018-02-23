@@ -19,9 +19,26 @@
 	  	<textarea name="codeInput" id="codeInput" cols="125" rows="25" > </textarea>
 		</div>
 
+
+		<fieldset>
+			<legend>Options for links that already have parameters</legend>
+		  <div>
+		    <input type="radio" name="options" id="append" value="append" checked>
+		    <label for="append">Add new parameters after any existing parameters</label>
+		  </div>
+		  <div>
+		    <input type="radio" name="options" id="Overwrite" value="Overwrite">
+		    <label for="Overwrite">Overwrite (delete) existing parameters with new parameters</label>
+		  </div>
+		  <div>
+		    <input type="radio" name="options" id="ignore" value="ignore">
+		    <label for="ignore">Ignore links with existing parameters</label>
+		  </div>
+		</fieldset>
+
     <button id="submit" name="submit" value="Submit" class="btn" onclick="return addParams();">SUBMIT</button>
 
-  	<div class="codebox">
+  	<div class="codebox" id="outputs">
   		<div id="outputParams">
   			<h3>Parameter used:</h3>
 	  	</div>

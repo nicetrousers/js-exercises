@@ -1,5 +1,8 @@
 function addParams() {
-	$('.code').remove();
+  document.querySelectorAll('.code').forEach(function(x) {
+	  x.remove();
+	});
+	document.getElementById('parameters').value.trim();
 	var parameters = document.getElementById('parameters').value.trim(); 
 	var codeInput = document.getElementById('codeInput').value;
 
@@ -31,6 +34,8 @@ function changeLinks(frame,params) {
 	for (i = 0; i < anchorList.length; i++) {
 		var anchor = anchorList[i].getAttribute('href');
 		var check = checkAnchor(anchor);
+		var option = document.querySelector('input[name="options"]:checked').value;
+		console.log(option);
 		if (check) {
 			if (anchor.indexOf('?') != -1) anchor = (anchor + "&" + params);
 			else anchor = (anchor + "?" + params);
