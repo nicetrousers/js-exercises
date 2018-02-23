@@ -35,26 +35,25 @@ function changeLinks(frame,params) {
 		var anchor = anchorList[i].getAttribute('href');
 		var check = checkAnchor(anchor);
 		var option = document.querySelector('input[name="options"]:checked').value;
-		console.log(option);
 		if (check) {
 			if (anchor.indexOf('?') != -1) {
-				switch (option) {
-				  case 'append':
-						anchor = (anchor + "&" + params);
-					  printOutput(anchor, 'outputLinks');
-		  		  anchorList[i].setAttribute('href', anchor);
-				    break;
-				  case 'overwrite':
-				  	anchor = anchor.href.split('?')[0] + params;
-					  printOutput(anchor, 'outputLinks');
-		  		  anchorList[i].setAttribute('href', anchor);
-				    break;
-				  case 'ignore':
-				    printOutput(anchor, 'notOutputLinks');
-				    break;
-				}
-			}
-			else anchor = (anchor + "?" + params);
+				if ( option === 'ignore') {
+					printOutput(anchor, 'notOutputLinks');
+				} else {
+					if ( option === 'append') {
+					  anchor = anchor + "&" + params
+					} else if (option === 'overwrite') {
+				  	anchor = anchor.split('?');
+			  		anchor = anchor[0] + "?" + params
+			  	}
+					printOutput(anchor, 'outputLinks');
+	  		  anchorList[i].setAttribute('href', anchor);
+	  		}
+			} else {
+				anchor = (anchor + "?" + params);
+				printOutput(anchor, 'outputLinks');
+  		  anchorList[i].setAttribute('href', anchor);
+  		}
 		} else {
 			printOutput(anchor, 'notOutputLinks');
 		}
