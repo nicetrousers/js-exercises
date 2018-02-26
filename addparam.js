@@ -26,6 +26,8 @@ function htmlStringToFrame(html) {
 
 function frameToHtmlString(frame) {
 	var codeOutput = frame.contentDocument.documentElement.outerHTML;
+	var doctype = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> \n';
+  codeOutput = doctype + codeOutput;
   return codeOutput;
 }
 
