@@ -2,7 +2,6 @@ function addParams() {
   document.querySelectorAll('.code').forEach(function(x) {
 	  x.remove();
 	});
-	document.getElementById('parameters').value.trim();
 	var parameters = document.getElementById('parameters').value.trim(); 
 	var codeInput = document.getElementById('codeInput').value;
 
@@ -50,8 +49,8 @@ function changeLinks(frame,params) {
 			  	}
 					printOutput(anchor, 'outputLinks');
 	  		  anchorList[i].setAttribute('href', anchor);
-	  		}
-			} else {
+	  		} 
+	  	} else {
 				anchor = (anchor + "?" + params);
 				printOutput(anchor, 'outputLinks');
   		  anchorList[i].setAttribute('href', anchor);
@@ -72,15 +71,24 @@ function checkParameters(params) {
 	    params = params.slice(1);
 		}
 		params = params.replace(/\s/g, '');
-		printOutput(params,'outputParams');
+		var outputParams = document.getElementById('outputParams');
+		outputParams.innerHTML += "<p class='code'>"+params+"</p>";
 		return params;
 	}
 }
 
-function printOutput(text,target) {
+function printOutput(link,target) {
+	var link = link;
 	var target = target;
+	var outputClass = "code"
+	var anchorURL = checkOrigin(link);
+	if (anchorURL) {
+		outputClass += " orm";
+		console.log(outputClass);
+	};
+
 	var outputTarget = document.getElementById(target);
-	var outputText = "<p class='code'>"+text+"</p>";
+	var outputText = "<p class='"+outputClass+"'>"+link+"</p>";
 	outputTarget.innerHTML += outputText;
 }
 
@@ -93,4 +101,24 @@ function checkAnchor(link) {
 	} else {
 		return false;
 	}
+}
+
+function checkOrigin(link) {
+	var url = link;
+	var domainsArray = [
+		'www.oreilly.com',
+		'www.safaribooksonline.com',
+		'www.strataconf.com',
+		'www.velocityconf.com',
+		'www.fluentconf.com',
+		'www.jupytercon.com',
+		'www.softwarearchitectureconf.com',
+		'www.oscon.com'
+		];
+		for (n = 0; n < domainsArray.length; n++) {
+			if (url.indexOf(domainsArray[n]) >= 0) {
+				return true;
+			} 
+		}
+	return false;
 }

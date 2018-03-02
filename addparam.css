@@ -16,9 +16,13 @@ h1, h3 {
 .codebox p {
 	font-family: monospace;
 }
-#notOutputLinks p {
+.notOutputLinks p {
 	color: red;
 }
+p.orm {
+	color: green;
+}
+
 
 input[type="text"] {
 	width: 100%;
