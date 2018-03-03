@@ -16,7 +16,7 @@ h1, h3 {
 .codebox p {
 	font-family: monospace;
 }
-.notOutputLinks p {
+.ignore p {
 	color: red;
 }
 p.orm {
@@ -35,7 +35,7 @@ input[type="text"] {
 label {
 	display: block;
 }
-fieldset {
+.universal-options {
 	max-width: 700px;
 	margin-bottom: 20px;
 }
@@ -48,3 +48,42 @@ button {
   color: #fff;
   background: red;
 }
+.code, .codebox input[type='checkbox'], .codebox fieldset {
+	display: inline-block;
+	vertical-align: middle;
+}
+.code {
+	width: 70%;
+	word-break: break-word;
+}
+.codebox fieldset {
+	border:none;
+	width: 18%;
+}
+.code, .codebox input {
+	margin: 0 20px 12px 0;
+}
+.codebox fieldset input {
+	margin-right: 60px;
+}
+.codebox fieldset input:last-of-type {
+	margin-right: 0;
+}
+.output-header {
+	display: block;
+	width: 93%;
+	overflow: auto;
+}
+.output-header h3 {
+	float: left;
+}
+.output-labels {
+	float: right;
+	font-weight: bold;
+	margin-top: 20px;
+	} 
+.output-labels label {
+	display: inline;
+	margin-left: 20px;
+}
+

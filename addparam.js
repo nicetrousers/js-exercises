@@ -1,3 +1,22 @@
+
+window.onload = function() {
+	inputListener();
+}
+
+function inputListener() {
+	var paramIn = document.getElementById('parameters'); 
+	var codeIn = document.getElementById('codeInput');
+	paramIn.oninput = function() {
+		var chk = codeIn.value;
+		if (chk.length > 1) { addParams(); }
+	}
+	codeIn.oninput = function() {
+		var chk = paramIn.value;
+		if (chk.length > 1) { addParams(); }
+	}
+};
+
+
 function addParams() {
   document.querySelectorAll('.code').forEach(function(x) {
 	  x.remove();
@@ -39,24 +58,27 @@ function changeLinks(frame,params) {
 		if (check) {
 			if (anchor.indexOf('?') != -1) {
 				if ( option === 'ignore') {
-					printOutput(anchor, 'notOutputLinks');
+					printOutput(anchor, 'ignore');
 				} else {
+					var optionClass;
 					if ( option === 'append') {
 					  anchor = anchor + "&" + params
+					  optionClass = 'append';
 					} else if (option === 'overwrite') {
 				  	anchor = anchor.split('?');
-			  		anchor = anchor[0] + "?" + params
+			  		anchor = anchor[0] + "?" + params;
+			  		optionClass = 'overwrite';
 			  	}
-					printOutput(anchor, 'outputLinks');
+					printOutput(anchor, option);
 	  		  anchorList[i].setAttribute('href', anchor);
 	  		} 
 	  	} else {
 				anchor = (anchor + "?" + params);
-				printOutput(anchor, 'outputLinks');
-  		  anchorList[i].setAttribute('href', anchor);
+				printOutput(anchor, option);
+  		  anchorList[i].setAttribute('href', optionClass);
   		}
 		} else {
-			printOutput(anchor, 'notOutputLinks');
+			printOutput(anchor, 'ignore');
 		}
 	};
 	return frame;
@@ -77,18 +99,18 @@ function checkParameters(params) {
 	}
 }
 
-function printOutput(link,target) {
+function printOutput(link,option) {
 	var link = link;
-	var target = target;
-	var outputClass = "code"
+	var option = option;
+	var outputClass = "code";
+	var outputTextStart = "<div class='"+option+"' id=''><input type='checkbox' id=''><p class='";
+	var outputTextEnd = "</p><fieldset><legend style='display:none;'>Options</legend><input type='radio' name='options' id='append' value='append' checked><input type='radio' name='options' id='overwrite' value='overwrite'><input type='radio' name='options' id='ignore' value='ignore'></fieldset>";
 	var anchorURL = checkOrigin(link);
 	if (anchorURL) {
 		outputClass += " orm";
-		console.log(outputClass);
 	};
-
-	var outputTarget = document.getElementById(target);
-	var outputText = "<p class='"+outputClass+"'>"+link+"</p>";
+	var outputTarget = document.getElementById('outputLinks');
+	var outputText = outputTextStart+outputClass+"'>"+link+outputTextEnd;
 	outputTarget.innerHTML += outputText;
 }
 
@@ -96,7 +118,7 @@ function checkAnchor(link) {
 	if (
 		(link.indexOf('%%') == -1) &&
 		(link.indexOf('mailto') == -1) &&
-		(link.indexOf('{\\link') == -1)) {
+		(link.indexOf('{\\') == -1)) {
 		return true;
 	} else {
 		return false;
@@ -106,19 +128,17 @@ function checkAnchor(link) {
 function checkOrigin(link) {
 	var url = link;
 	var domainsArray = [
-		'www.oreilly.com',
-		'www.safaribooksonline.com',
-		'www.strataconf.com',
-		'www.velocityconf.com',
-		'www.fluentconf.com',
-		'www.jupytercon.com',
-		'www.softwarearchitectureconf.com',
-		'www.oscon.com'
+		'oreilly.com',
+		'safaribooksonline.com',
+		'strataconf.com',
+		'velocityconf.com',
+		'fluentconf.com',
+		'jupytercon.com',
+		'softwarearchitectureconf.com',
+		'oscon.com'
 		];
 		for (n = 0; n < domainsArray.length; n++) {
-			if (url.indexOf(domainsArray[n]) >= 0) {
-				return true;
-			} 
+			if (url.indexOf(domainsArray[n]) >= 0) return true; 
 		}
 	return false;
 }

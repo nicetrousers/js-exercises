@@ -20,7 +20,7 @@
 		</div>
 
 
-		<fieldset>
+		<fieldset class="universal-options">
 			<legend>Options for links that already have parameters</legend>
 		  <div>
 		    <input type="radio" name="options" id="append" value="append" checked>
@@ -42,12 +42,18 @@
   		<div id="outputParams">
   			<h3>Parameter used:</h3>
 	  	</div>
-	  	<div id="outputLinks">
-	  		<h3>Links updated:</h3>
+	  	<div id="outputLinks" class="output-links"">
+	  		<div class="output-header">
+		  		<h3>Links:</h3>
+		  		<div class="output-labels">
+			  		<label for="">Append</label>
+			  		<label for="">Replace</label>
+			  		<label for="">Ignore</label>
+			  	</div>
+		  	</div>
+
 	  	</div>
-	  	<div id="notOutputLinks" class="notOutputLinks">
-	  		<h3>Links NOT changed:</h3>
-	  	</div>
+
 	  	<label for="codeOutput">Output code:</label>
 	  	<textarea name="codeOutput" id="codeOutput" cols="125" rows="25"  disabled > </textarea>
 	  </div>
