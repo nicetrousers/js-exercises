@@ -7,36 +7,19 @@
 	<link rel="stylesheet" type="text/css" href="addparam.css" />
 </head>
 <body>
+	<main>
 	<h1>Add parameters</h1>
 
   	<div class="codebox params">
 	  	<label for="parameters">Enter parameters:</label>
-	  	<textarea name="parameters" id="parameters" cols="125" rows="1" > </textarea>
+	  	<textarea name="parameters" id="parameters" cols="160" rows="1" > </textarea>
 	  </div>
 
   	<div class="codebox">
 	  	<label for="codeInput">Enter code:</label>
-	  	<textarea name="codeInput" id="codeInput" cols="125" rows="25" > </textarea>
+	  	<textarea name="codeInput" id="codeInput" cols="160" rows="25" > </textarea>
 		</div>
 
-
-		<fieldset class="universal-options">
-			<legend>Options for links that already have parameters</legend>
-		  <div>
-		    <input type="radio" name="options" id="append" value="append" checked>
-		    <label for="append">Add new parameters after any existing parameters</label>
-		  </div>
-		  <div>
-		    <input type="radio" name="options" id="overwrite" value="overwrite">
-		    <label for="overwrite">Overwrite (delete) existing parameters with new parameters</label>
-		  </div>
-		  <div>
-		    <input type="radio" name="options" id="ignore" value="ignore">
-		    <label for="ignore">Ignore links with existing parameters</label>
-		  </div>
-		</fieldset>
-
-    <button id="submit" name="submit" value="Submit" class="btn" onclick="return addParams();">SUBMIT</button>
 
   	<div class="codebox" id="outputs">
   		<div id="outputParams">
@@ -44,21 +27,18 @@
 	  	</div>
 	  	<div id="outputLinks" class="output-links"">
 	  		<div class="output-header">
-		  		<h3>Links:</h3>
-		  		<div class="output-labels">
-			  		<label for="">Append</label>
-			  		<label for="">Replace</label>
-			  		<label for="">Ignore</label>
-			  	</div>
+		  		<label for="">Append</label>
+		  		<label for="">Replace</label>
+		  		<label for="">Ignore</label>
 		  	</div>
 
 	  	</div>
 
 	  	<label for="codeOutput">Output code:</label>
-	  	<textarea name="codeOutput" id="codeOutput" cols="125" rows="25"  disabled > </textarea>
+	  	<textarea name="codeOutput" id="codeOutput" cols="160" rows="25"  disabled > </textarea>
 	  </div>
 
 	</form>
-
+	</main>
 </body>
 </html>

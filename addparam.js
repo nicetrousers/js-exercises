@@ -6,16 +6,24 @@ window.onload = function() {
 function inputListener() {
 	var paramIn = document.getElementById('parameters'); 
 	var codeIn = document.getElementById('codeInput');
-	paramIn.oninput = function() {
-		var chk = codeIn.value;
-		if (chk.length > 1) { addParams(); }
-	}
-	codeIn.oninput = function() {
-		var chk = paramIn.value;
-		if (chk.length > 1) { addParams(); }
-	}
+	paramIn.addEventListener('input',function(event) {
+		pauseChk(codeIn);
+	});
+	codeIn.addEventListener('input',function(event) {
+		pauseChk(paramIn);
+	});
 };
 
+var textInput = document.getElementById('test-input');
+
+function pauseChk(field) {
+	var timeout = null;
+	clearTimeout(timeout);
+  timeout = setTimeout(function () {
+		var chk = field.value;
+		if (chk.length > 1) { addParams(); }  
+	}, 500); //change to 500
+};
 
 function addParams() {
   document.querySelectorAll('.code').forEach(function(x) {
@@ -53,8 +61,10 @@ function changeLinks(frame,params) {
 	var anchorList = frame.contentDocument.getElementsByTagName('a');
 	for (i = 0; i < anchorList.length; i++) {
 		var anchor = anchorList[i].getAttribute('href');
+		var option = "append";
 		var check = checkAnchor(anchor);
-		var option = document.querySelector('input[name="options"]:checked').value;
+
+		// var option = document.querySelector('input[name="options"]:checked').value;
 		if (check) {
 			if (anchor.indexOf('?') != -1) {
 				if ( option === 'ignore') {
@@ -102,9 +112,10 @@ function checkParameters(params) {
 function printOutput(link,option) {
 	var link = link;
 	var option = option;
-	var outputClass = "code";
-	var outputTextStart = "<div class='"+option+"' id=''><input type='checkbox' id=''><p class='";
-	var outputTextEnd = "</p><fieldset><legend style='display:none;'>Options</legend><input type='radio' name='options' id='append' value='append' checked><input type='radio' name='options' id='overwrite' value='overwrite'><input type='radio' name='options' id='ignore' value='ignore'></fieldset>";
+	var optionNumber = "options"+i;
+	var outputClass ;
+	var outputTextStart = "<div class='code "+option+"'><fieldset><legend style='display:none;'>Options</legend><input type='radio' name='"+optionNumber+"' id='append' value='append' checked><input type='radio' name='"+optionNumber+"' id='overwrite' value='overwrite'><input type='radio' name='"+optionNumber+"' id='ignore' value='ignore'></fieldset><p class='";
+	var outputTextEnd = "</p>";
 	var anchorURL = checkOrigin(link);
 	if (anchorURL) {
 		outputClass += " orm";
