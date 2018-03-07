@@ -14,8 +14,6 @@ function inputListener() {
 	});
 };
 
-var textInput = document.getElementById('test-input');
-
 function pauseChk(field) {
 	var timeout = null;
 	clearTimeout(timeout);
@@ -26,20 +24,29 @@ function pauseChk(field) {
 };
 
 function addParams() {
+	// remove any existing links on page
   document.querySelectorAll('.code').forEach(function(x) {
 	  x.remove();
 	});
-	var parameters = document.getElementById('parameters').value.trim(); 
+	// get input parameters and code
+	var parameters = document.getElementById('parameters').value; 
 	var codeInput = document.getElementById('codeInput').value;
-
+	// clean up and display parameters
 	parameters = checkParameters(parameters);
+	// convert input code to iframe
 	var codeObject = htmlStringToFrame(codeInput);
-  changeLinks(codeObject, parameters);
+	// add parameters to input code and page
+  // changeLinks(codeObject, parameters);
+  createLinkList(codeObject);
+  // convert iframe back to string value
 	var codeOutput = frameToHtmlString(codeObject);
+	// add string to output box
 	document.getElementById('codeOutput').innerHTML = codeOutput;
+	// remove iframe
 	document.body.removeChild(codeObject)
 }
 
+// convert input code to iframe
 function htmlStringToFrame(html) {
   var frame = document.createElement('iframe');
   frame.style.display = 'none';
@@ -50,6 +57,7 @@ function htmlStringToFrame(html) {
   return frame;
 }
 
+// convert iframe back to string value
 function frameToHtmlString(frame) {
 	var codeOutput = frame.contentDocument.documentElement.outerHTML;
 	var doctype = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> \n';
@@ -57,14 +65,24 @@ function frameToHtmlString(frame) {
   return codeOutput;
 }
 
+var anchorArray = [];
+
+function createLinkList(frame) {
+	var anchorList = frame.contentDocument.getElementsByTagName('a');
+	for (k = 0; k < anchorList.length; k++) {
+		var anchorHref = anchorList[k].getAttribute('href');
+		var option = 'append';
+		anchorArray[k] = [anchorHref, option];
+	};
+};
+
 function changeLinks(frame,params) {
 	var anchorList = frame.contentDocument.getElementsByTagName('a');
+	var option = "append";;
 	for (i = 0; i < anchorList.length; i++) {
 		var anchor = anchorList[i].getAttribute('href');
-		var option = "append";
+		// var option = "append";
 		var check = checkAnchor(anchor);
-
-		// var option = document.querySelector('input[name="options"]:checked').value;
 		if (check) {
 			if (anchor.indexOf('?') != -1) {
 				if ( option === 'ignore') {
@@ -91,22 +109,18 @@ function changeLinks(frame,params) {
 			printOutput(anchor, 'ignore');
 		}
 	};
+	setCheck(option);
 	return frame;
 }
 
 function checkParameters(params) {
-	if (params.length < 1) {
-		alert("please enter parameters")
-		return false
-	} else {
-		if (params.charAt(0) === "?") {
-	    params = params.slice(1);
-		}
-		params = params.replace(/\s/g, '');
-		var outputParams = document.getElementById('outputParams');
-		outputParams.innerHTML += "<p class='code'>"+params+"</p>";
-		return params;
+	if (params.charAt(0) === "?") {
+    params = params.slice(1);
 	}
+	params = params.replace(/\s/g, '');
+	var outputParams = document.getElementById('outputParams');
+	outputParams.innerHTML += "<p class='code'>"+params+"</p>";
+	return params;
 }
 
 function printOutput(link,option) {
@@ -114,7 +128,7 @@ function printOutput(link,option) {
 	var option = option;
 	var optionNumber = "options"+i;
 	var outputClass ;
-	var outputTextStart = "<div class='code "+option+"'><fieldset><legend style='display:none;'>Options</legend><input type='radio' name='"+optionNumber+"' id='append' value='append' checked><input type='radio' name='"+optionNumber+"' id='overwrite' value='overwrite'><input type='radio' name='"+optionNumber+"' id='ignore' value='ignore'></fieldset><p class='";
+	var outputTextStart = "<form class='code' id='fieldset"+i+"' name='fieldset"+i+"'><fieldset><legend style='display:none;'>Options</legend><input type='radio' name='options"+i+"' id='append"+i+"' value='append'><input type='radio' name='options"+i+"' id='overwrite"+i+"' value='overwrite'><input type='radio' name='options"+i+"' id='ignore"+i+"' value='ignore'></fieldset></div><p class='";
 	var outputTextEnd = "</p>";
 	var anchorURL = checkOrigin(link);
 	if (anchorURL) {
@@ -123,6 +137,23 @@ function printOutput(link,option) {
 	var outputTarget = document.getElementById('outputLinks');
 	var outputText = outputTextStart+outputClass+"'>"+link+outputTextEnd;
 	outputTarget.innerHTML += outputText;
+	// setCheck(option);
+}
+
+function setCheck(option) {
+	// optionID = option+i;
+	// var optionSet = document.getElementById(optionID);
+	// optionSet.setAttribute('checked',true);
+
+	var optionID = option+i;
+	var fieldSet = 'fieldset'+i;
+	var optionSet = document.getElementById('fieldset'+i);
+
+	console.log(optionSet);
+
+	// var optionName = 'options'+i;
+	// document.forms[fieldSet][optionName].checked=true;
+
 }
 
 function checkAnchor(link) {
