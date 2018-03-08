@@ -70,3 +70,16 @@ label {
 .codebox fieldset input:last-of-type {
 	margin-right: 0;
 }
+button {
+  font-size: 16px;
+  padding: 8px;
+  color: #fff;
+  background: #d3002d;
+  border: none;
+}
+button:focus, button: active, button:hover {
+  background: #9f0027;
+}
+button:disabled {
+	background: #c3929c;
+}
