@@ -20,11 +20,11 @@ h1, h3 {
 .codebox p {
 	font-family: monospace;
 }
-.ignore p {
-	color: red;
-}
 p.orm {
 	color: green;
+}
+.ignore p {
+	color: red;
 }
 input[type="text"] {
 	width: 100%;

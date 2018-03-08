@@ -3,9 +3,6 @@ window.onload = function() {
 	inputListener();
 }
 
-var anchorArray = [];
-var params = "";
-
 function inputListener() {
 	var paramIn = document.getElementById('parameters'); 
 	var codeIn = document.getElementById('codeInput');
@@ -19,12 +16,13 @@ function inputListener() {
 
 function inputChk(field) {
 	var chk = field.value;
-	if (chk.length > 1) activateSubmit();	
+	if (chk.length > 1) { 
+		document.getElementById('submit').removeAttribute('disabled');
+	}
 }
 
-function activateSubmit() { 
-	document.getElementById('submit').removeAttribute('disabled');
-}
+var anchorArray = [];
+var params = "";
 
 function addParams() {
 	// remove any existing links on page
@@ -137,7 +135,7 @@ function printLink(arr) {
 	var anchorOption = arr[1];
 	var anchorObject = arr[2];
 	var outputClass ;
-	var outputTextStart = "<form class='code' id='fieldset"+i+"' name='fieldset"+i+"'><fieldset><legend style='display:none;'>Options</legend><input type='radio' name='options"+i+"' id='append"+i+"' value='append' onClick=changeOption('"+i+"','0')><input type='radio' name='options"+i+"' id='replace' value='replace' onClick=changeOption('"+i+"','1')><input type='radio' name='options"+i+"' id='ignore"+i+"' value='ignore' onClick=changeOption('"+i+"','2')></fieldset></div><p class='";
+	var outputTextStart = "<form class='code' id='fieldset"+i+"' name='fieldset"+i+"'><fieldset><legend style='display:none;'>Options</legend><input type='radio' name='options"+i+"' id='append"+i+"' value='append' onClick=changeOption('"+i+"','0')><input type='radio' name='options"+i+"' id='replace"+i+"' value='replace' onClick=changeOption('"+i+"','1')><input type='radio' name='options"+i+"' id='ignore"+i+"' value='ignore' onClick=changeOption('"+i+"','2')></fieldset></div><p class='";
 	var outputTextEnd = "</p>";
 	var anchorURL = checkOrigin(anchorString);
 	if (anchorURL) { outputClass += " orm" };
