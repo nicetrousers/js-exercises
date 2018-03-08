@@ -1,9 +1,5 @@
-
+// check for input field inputs
 window.onload = function() {
-	inputListener();
-}
-
-function inputListener() {
 	var paramIn = document.getElementById('parameters'); 
 	var codeIn = document.getElementById('codeInput');
 	paramIn.addEventListener('input',function(event) {
@@ -14,6 +10,7 @@ function inputListener() {
 	});
 };
 
+// activate submit button when both input fields have content
 function inputChk(field) {
 	var chk = field.value;
 	if (chk.length > 1) { 
@@ -21,6 +18,7 @@ function inputChk(field) {
 	}
 }
 
+// set universal variables 
 var anchorArray = [];
 var params = "";
 
@@ -29,9 +27,10 @@ function addParams() {
   document.querySelectorAll('.code').forEach(function(x) {
 	  x.remove();
 	});
+	//disable submit button to prevent accidental overwrite of option changes
 	document.getElementById('submit').setAttribute('disabled','true');
 
-	// get input code
+	// get input code and parameters
 	var codeInput = document.getElementById('codeInput').value;
 	params = document.getElementById('parameters').value; 
 	params = checkParameters(params);
@@ -41,6 +40,8 @@ function addParams() {
 	// convert input code to iframe
 	var codeObject = htmlStringToFrame(codeInput);
   createLinkList(codeObject); 
+
+  //cycle through links, printing and adding to output code
 	for (i = 0; i < anchorArray.length; i++) {
 		printLink(anchorArray[i]);
 	  changeLink(anchorArray[i],params);
@@ -51,6 +52,7 @@ function addParams() {
 	document.getElementById('codeOutput').innerHTML = codeOutput;
 }
 
+// update universal array and output code when options are made
 function changeOption(id,input) {
 	switch (input) {
 		case '0':
@@ -66,17 +68,16 @@ function changeOption(id,input) {
 			console.log("error");
 	}
 	changeLink(anchorArray[id]);
-
 	var codeObject = document.getElementById('codeFrame');
 	var codeOutput = frameToHtmlString(codeObject);
 	document.getElementById('codeOutput').innerHTML = codeOutput;
 }
 
+// add parameters to links, depending on option selected 
 function changeLink(arr) {
 	var anchor = arr[0];
 	var option = arr[1];
 	var obj = arr[2];
-	// var params = params;
 	if (option === 'ignore') {
 		obj.setAttribute('href', anchor)
 	} else {
@@ -114,7 +115,7 @@ function frameToHtmlString(frame) {
   return codeOutput;
 }
 
-// 
+// add links and initial options to universal array
 function createLinkList(frame) {
 	if (anchorArray.length === 0) {
 		var option = 'append';
@@ -130,6 +131,7 @@ function createLinkList(frame) {
 	return anchorArray;
 };
 
+// add links and option buttons to page on initial submit
 function printLink(arr) {
 	var anchorString = arr[0];
 	var anchorOption = arr[1];
@@ -145,12 +147,14 @@ function printLink(arr) {
 	setCheck(anchorOption);
 }
 
+// check default options in radio buttons
 function setCheck(option) {
 	var optionID = option+i;
 	var optionSet = document.getElementById(optionID);
 	optionSet.setAttribute('checked',true);
 }
 
+// clean up parameters by removing invisible chars, initial question mark
 function checkParameters(params) {
 	if (params.charAt(0) === "?") {
     params = params.slice(1);
@@ -159,6 +163,7 @@ function checkParameters(params) {
 	return params;
 }
 
+// check links against default ignore list
 function checkAnchor(link) {
 	if (
 		(link.indexOf('%%') == -1) &&
@@ -170,6 +175,7 @@ function checkAnchor(link) {
 	}
 }
 
+// check links against oreilly domain list
 function checkOrigin(link) {
 	var url = link;
 	var domainsArray = [
