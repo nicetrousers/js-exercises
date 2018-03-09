@@ -27,6 +27,11 @@ function addParams() {
   document.querySelectorAll('.code').forEach(function(x) {
 	  x.remove();
 	});
+	var oldFrame = document.getElementById('codeFrame');
+	if (oldFrame !== null) {
+		oldFrame.parentNode.removeChild(oldFrame);
+	}
+
 	//disable submit button to prevent accidental overwrite of option changes
 	document.getElementById('submit').setAttribute('disabled','true');
 
