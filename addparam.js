@@ -1,3 +1,5 @@
+// version 2.01
+
 // check for input field inputs
 window.onload = function() {
 	var paramIn = document.getElementById('parameters'); 
@@ -23,7 +25,7 @@ var anchorArray = [];
 var params = "";
 
 function addParams() {
-	// remove any existing links on page
+	// remove any existing links and iframes on page
   document.querySelectorAll('.code').forEach(function(x) {
 	  x.remove();
 	});
